@@ -1,5 +1,3 @@
-package br.com.sevendays;
-
 import org.json.JSONObject;
 
 import java.io.IOException;
