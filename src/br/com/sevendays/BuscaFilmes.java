@@ -26,6 +26,7 @@ public class BuscaFilmes {
         JSONObject jsonObject = new JSONObject(response.body());
         System.out.println(response.statusCode());
         System.out.println(jsonObject.toString(4));
+
     }
 
 }
