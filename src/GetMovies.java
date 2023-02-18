@@ -1,3 +1,4 @@
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -7,7 +8,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
-public class BuscaFilmes {
+public class GetMovies {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -21,9 +22,25 @@ public class BuscaFilmes {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
+        //Capturando o resultado da API com o JSONObject
         JSONObject jsonObject = new JSONObject(response.body());
-        System.out.println(response.statusCode());
-        System.out.println(jsonObject.toString(4));
+
+        //Buscando apenas os array dos items
+        JSONArray items = jsonObject.getJSONArray("items");
+//        System.out.println(items.toString(2));
+
+        Movie movie = new Movie();
+        System.out.println("----------Titles----------");
+        movie.parseTitles(items);
+
+        System.out.println("----------Images----------");
+        movie.parseUrlImages(items);
+
+        System.out.println("----------Years----------");
+        movie.parseYears(items);
+
+        System.out.println("----------Ratings----------");
+        movie.parseRatings(items);
 
     }
 
