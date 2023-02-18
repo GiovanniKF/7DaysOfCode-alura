@@ -22,10 +22,10 @@ public class GetMovies {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        //Capturando o resultado da API com o JSONObject
+        //Utilizei o JSONObject para formatar no console e manipulá-lo depois.
         JSONObject jsonObject = new JSONObject(response.body());
 
-        //Buscando apenas os array dos items
+        //Buscando apenas os array dos items (filmes).
         JSONArray items = jsonObject.getJSONArray("items");
 //        System.out.println(items.toString(2));
 
