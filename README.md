@@ -8,5 +8,5 @@ Para conseguir manipular no console e formatar o resultado utilizei o JSONObject
 # Dia 2
 Agora precisei listar alguns dados específicos que busquei anteriormente.
 Para isso, fiz alguns métodos na classe 'Movie' para listar os títulos, url da imagem, ano e as avaliações utilizando das funcionalidades do JSONObject.
-Agora consigo chamar os métodos na classe GetMovie para listar cada dado que preciso.
+Agora consigo chamar os métodos na classe 'GetMovie' para listar cada dado que preciso.
 
