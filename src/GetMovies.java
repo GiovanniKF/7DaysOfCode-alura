@@ -7,8 +7,12 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GetMovies {
+
+    public record Movie (String title, String urlImage, String year, String rating) {}
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -27,21 +31,77 @@ public class GetMovies {
 
         //Buscando apenas os array dos items (filmes).
         JSONArray items = jsonObject.getJSONArray("items");
-//        System.out.println(items.toString(2));
 
-        Movie movie = new Movie();
-        System.out.println("----------Titles----------");
-        movie.parseTitles(items);
+        List<Movie> movies = parse(items);
+        System.out.println(movies);
 
-        System.out.println("----------Images----------");
-        movie.parseUrlImages(items);
+    }
 
-        System.out.println("----------Years----------");
-        movie.parseYears(items);
+    public static List<Movie> parse(JSONArray items) {
+        List<String> titles = parseTitles(items);
+        List<String> urlImages = parseUrlImages(items);
+        List<String> years = parseYears(items);
+        List<String> ratings = parseRatings(items);
 
-        System.out.println("----------Ratings----------");
-        movie.parseRatings(items);
+        List<Movie> movies = new ArrayList<>(titles.size());
 
+        for (int i = 0; i < titles.size(); i++) {
+            movies.add(new Movie(titles.get(i), urlImages.get(i), years.get(i), ratings.get(i)));
+        }
+
+        return movies;
+    }
+
+    public static List<String> parseTitles(JSONArray json) {
+        List<String> titles = new ArrayList<>();
+
+        for (int i = 0; i < json.length(); i++) {
+            JSONObject movies = json.getJSONObject(i);
+            String title = movies.getString("title");
+
+            titles.add(title);
+        }
+
+        return titles;
+    }
+
+    public static List<String> parseUrlImages(JSONArray json) {
+        List<String> urlImages = new ArrayList<>();
+
+        for (int i = 0; i < json.length(); i++) {
+            JSONObject movies = json.getJSONObject(i);
+            String image = movies.getString("image");
+
+            urlImages.add(image);
+        }
+
+        return urlImages;
+    }
+
+    public static List<String> parseYears(JSONArray json) {
+        List<String> years = new ArrayList<>();
+
+        for (int i = 0; i < json.length(); i++) {
+            JSONObject movies = json.getJSONObject(i);
+            String year = movies.getString("year");
+
+            years.add(year);
+        }
+
+        return years;
+    }
+
+    public static List<String> parseRatings(JSONArray json) {
+        List<String> ratings = new ArrayList<>();
+
+        for (int i = 0; i < json.length(); i++) {
+            JSONObject movies = json.getJSONObject(i);
+            String rating = movies.getString("imDbRating");
+
+            ratings.add(rating);
+        }
+
+        return ratings;
     }
 
 }
