@@ -6,7 +6,13 @@ O projeto consiste em criar uma requisição GET para consumir uma API de filmes
 Para conseguir manipular no console e formatar o resultado utilizei o JSONObject que possui diversas funcionalidades.
 
 # Dia 2
-Agora precisei listar alguns dados específicos que busquei anteriormente.
-Para isso, fiz alguns métodos na classe 'Movie' para listar os títulos, url da imagem, ano e as avaliações utilizando das funcionalidades do JSONObject.
-Agora consigo chamar os métodos na classe 'GetMovie' para listar cada dado que preciso.
+Agora precisei separar e listar alguns dados específicos que busquei anteriormente.
+Para isso, fiz alguns métodos na classe 'GetMovie' para separar o título, url da imagem, ano e as avaliação utilizando das funcionalidades do JSONObject.
 
+![Print 1 - Métodos criados no dia 2](/img/print1.png)
+
+# Dia 3
+O desafio agora foi juntar as listas dos dados extraídos de cada lista, fazendo uma única lista de filmes.
+Para fazer essa lista criei um método que adicionasse cada elemento das outras listas em cada entrada.
+
+![Print 2 - Método criado no dia 3](/img/print2.png)
