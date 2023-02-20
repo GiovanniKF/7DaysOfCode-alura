@@ -2,6 +2,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -33,7 +34,12 @@ public class GetMovies {
         JSONArray items = jsonObject.getJSONArray("items");
 
         List<Movie> movies = parse(items);
-        System.out.println(movies);
+
+        PrintWriter writer = new PrintWriter("movies.html");
+
+        HTMLGenerator generator = new HTMLGenerator(writer);
+        generator.generate(movies);
+        writer.close();
 
     }
 
