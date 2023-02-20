@@ -16,3 +16,7 @@ O desafio agora foi juntar as listas dos dados extraídos de cada lista, fazendo
 Para fazer essa lista criei um método que adicionasse cada elemento das outras listas em cada entrada.
 
 ![Print 2 - Método criado no dia 3](/img/print2.png)
+
+# Dia 4
+No dia 4 precisei gerar um HTML com todos os dados coletados.
+Utilizando o PrintWriter criei um arquivo HTML e utilizei Bootstrap para estilizar a página com os filmes.
