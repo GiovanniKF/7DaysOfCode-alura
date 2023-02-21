@@ -1,46 +1,21 @@
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetMovies {
+public class Movie {
 
-    public record Movie (String title, String urlImage, String year, String rating) {}
+    String title;
+    String urlImage;
+    String year;
+    String rating;
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-
-        HttpClient client = HttpClient.newHttpClient();
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://imdb-api.com/en/API/Top250Movies/k_l4zt2oir"))
-                .timeout(Duration.ofMinutes(1))
-                .GET()
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        //Utilizei o JSONObject para formatar no console e manipulá-lo depois.
-        JSONObject jsonObject = new JSONObject(response.body());
-
-        //Buscando apenas os array dos items (filmes).
-        JSONArray items = jsonObject.getJSONArray("items");
-
-        List<Movie> movies = parse(items);
-
-        PrintWriter writer = new PrintWriter("movies.html");
-
-        HTMLGenerator generator = new HTMLGenerator(writer);
-        generator.generate(movies);
-        writer.close();
-
+    public Movie(String title, String urlImage, String year, String rating) {
+        this.title = title;
+        this.urlImage = urlImage;
+        this.year = year;
+        this.rating = rating;
     }
 
     public static List<Movie> parse(JSONArray items) {

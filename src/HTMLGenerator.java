@@ -9,14 +9,14 @@ public class HTMLGenerator {
         this.writer = writer;
     }
 
-    public void generate(List<GetMovies.Movie> movies) {
+    public void generate(List<Movie> movies) {
         writer.println(
                 """
                 <html>
                     <head>
                         <meta charset="utf-8">
                         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
                         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
                     </head>
                 </html>
@@ -24,7 +24,7 @@ public class HTMLGenerator {
                     <div class="row">
                 """);
 
-        for (GetMovies.Movie movie: movies) {
+        for (Movie movie: movies) {
             String divTemplate =
                     """
                     <div class="col-md-2">
@@ -38,7 +38,7 @@ public class HTMLGenerator {
                     </div>
                     """;
 
-            writer.println(String.format(divTemplate, movie.title(), movie.urlImage(), movie.title(), movie.rating(), movie.year()));
+            writer.println(String.format(divTemplate, movie.title, movie.urlImage, movie.title, movie.rating, movie.year));
         }
 
         writer.println(
