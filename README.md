@@ -20,3 +20,6 @@ Para fazer essa lista criei um método que adicionasse cada elemento das outras 
 # Dia 4
 No dia 4 precisei gerar um HTML com todos os dados coletados.
 Utilizando o PrintWriter criei um arquivo HTML e utilizei Bootstrap para estilizar a página com os filmes.
+
+# Dia 5
+Neste quinto dia o desafio foi encapsular a chamada de API. Além disso foi encapsulado também o código que faz o parseamento do JSON, assim foram criadas 2 novas classes no projeto (ImbdApiClient e Movie).
