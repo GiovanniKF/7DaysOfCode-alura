@@ -1,24 +1,17 @@
+package br.com.alura.desafio.main;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Movie {
+record Movie(String title, String urlImage, String year, String rating) implements Content {
+}
 
-    String title;
-    String urlImage;
-    String year;
-    String rating;
+public class ImdbMovieJsonParser implements JsonParser {
 
-    public Movie(String title, String urlImage, String year, String rating) {
-        this.title = title;
-        this.urlImage = urlImage;
-        this.year = year;
-        this.rating = rating;
-    }
-
-    public static List<Movie> parse(JSONArray items) {
+    public List<? extends Content> parse(JSONArray items) {
         List<String> titles = parseTitles(items);
         List<String> urlImages = parseUrlImages(items);
         List<String> years = parseYears(items);
@@ -84,5 +77,4 @@ public class Movie {
 
         return ratings;
     }
-
 }

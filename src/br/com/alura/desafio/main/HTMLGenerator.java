@@ -1,3 +1,5 @@
+package br.com.alura.desafio.main;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class HTMLGenerator {
         this.writer = writer;
     }
 
-    public void generate(List<Movie> movies) {
+    public void generate(List<? extends Content> contents) {
         writer.println(
                 """
                 <html>
@@ -24,7 +26,7 @@ public class HTMLGenerator {
                     <div class="row">
                 """);
 
-        for (Movie movie: movies) {
+        for (Content content: contents) {
             String divTemplate =
                     """
                     <div class="col-md-2">
@@ -38,7 +40,7 @@ public class HTMLGenerator {
                     </div>
                     """;
 
-            writer.println(String.format(divTemplate, movie.title, movie.urlImage, movie.title, movie.rating, movie.year));
+            writer.println(String.format(divTemplate, content.title(), content.urlImage(), content.title(), content.rating(), content.year()));
         }
 
         writer.println(
