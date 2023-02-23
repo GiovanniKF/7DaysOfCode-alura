@@ -1,80 +1,77 @@
 package br.com.alura.desafio.main;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.google.gson.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-record Movie(String title, String urlImage, String year, String rating) implements Content {
+record Movie(String title, String urlImage, String year, String rating, String type) implements Content {
+
+    @Override
+    public int compareTo(Content o) {
+        return this.rating().compareTo(o.rating());
+    }
+
 }
 
-public class ImdbMovieJsonParser implements JsonParser {
+public class ImdbMovieJsonParser implements JsonParse {
 
-    public List<? extends Content> parse(JSONArray items) {
-        List<String> titles = parseTitles(items);
-        List<String> urlImages = parseUrlImages(items);
-        List<String> years = parseYears(items);
-        List<String> ratings = parseRatings(items);
+    public List<? extends Content> parse(String json) {
+        JsonObject jsonObject = new Gson().fromJson(json, JsonObject.class);
+        JsonArray jsonArray = jsonObject.getAsJsonArray("items");
+
+        List<String> titles = parseTitles(jsonArray);
+        List<String> urlImages = parseUrlImages(jsonArray);
+        List<String> years = parseYears(jsonArray);
+        List<String> ratings = parseRatings(jsonArray);
+        String type = "Movie";
 
         List<Movie> movies = new ArrayList<>(titles.size());
 
         for (int i = 0; i < titles.size(); i++) {
-            movies.add(new Movie(titles.get(i), urlImages.get(i), years.get(i), ratings.get(i)));
+            movies.add(new Movie(titles.get(i), urlImages.get(i), years.get(i), ratings.get(i), type));
         }
 
         return movies;
     }
 
-    public static List<String> parseTitles(JSONArray json) {
+    public static List<String> parseTitles(JsonArray content) {
         List<String> titles = new ArrayList<>();
 
-        for (int i = 0; i < json.length(); i++) {
-            JSONObject movies = json.getJSONObject(i);
-            String title = movies.getString("title");
-
-            titles.add(title);
+        for (int i = 0; i < content.size(); i++) {
+            titles.add(content.get(i).getAsJsonObject().get("title").getAsString());
         }
 
         return titles;
     }
 
-    public static List<String> parseUrlImages(JSONArray json) {
-        List<String> urlImages = new ArrayList<>();
+    public static List<String> parseUrlImages(JsonArray content) {
+        List<String> titles = new ArrayList<>();
 
-        for (int i = 0; i < json.length(); i++) {
-            JSONObject movies = json.getJSONObject(i);
-            String image = movies.getString("image");
-
-            urlImages.add(image);
+        for (int i = 0; i < content.size(); i++) {
+            titles.add(content.get(i).getAsJsonObject().get("image").getAsString());
         }
 
-        return urlImages;
+        return titles;
     }
 
-    public static List<String> parseYears(JSONArray json) {
-        List<String> years = new ArrayList<>();
+    public static List<String> parseYears(JsonArray content) {
+        List<String> titles = new ArrayList<>();
 
-        for (int i = 0; i < json.length(); i++) {
-            JSONObject movies = json.getJSONObject(i);
-            String year = movies.getString("year");
-
-            years.add(year);
+        for (int i = 0; i < content.size(); i++) {
+            titles.add(content.get(i).getAsJsonObject().get("year").getAsString());
         }
 
-        return years;
+        return titles;
     }
 
-    public static List<String> parseRatings(JSONArray json) {
-        List<String> ratings = new ArrayList<>();
+    public static List<String> parseRatings(JsonArray content) {
+        List<String> titles = new ArrayList<>();
 
-        for (int i = 0; i < json.length(); i++) {
-            JSONObject movies = json.getJSONObject(i);
-            String rating = movies.getString("imDbRating");
-
-            ratings.add(rating);
+        for (int i = 0; i < content.size(); i++) {
+            titles.add(content.get(i).getAsJsonObject().get("imDbRating").getAsString());
         }
 
-        return ratings;
+        return titles;
     }
 }

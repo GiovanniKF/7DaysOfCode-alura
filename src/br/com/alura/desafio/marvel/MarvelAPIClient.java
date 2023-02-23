@@ -1,28 +1,29 @@
-package br.com.alura.desafio.main;
+package br.com.alura.desafio.marvel;
+
+import br.com.alura.desafio.main.APIClient;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.Duration;
 
-public class ImdbAPIClient implements APIClient{
+public class MarvelAPIClient implements APIClient {
 
-    private final String apiKey;
+    private final String endpoint;
 
-    public ImdbAPIClient(String apiKey) {
-        this.apiKey = apiKey;
+    public MarvelAPIClient(String privateKey, String publicKey) {
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        String hash = HashUtils.getHashMd5(timestamp + privateKey + publicKey);
+        this.endpoint = String.format("https://gateway.marvel.com:443/v1/public/series?ts=%s&hash=%s&apikey=%s", timestamp, hash, publicKey);
     }
 
-    public String getBody() {
+    public String getBody(){
 
         try {
             HttpClient client = HttpClient.newHttpClient();
-
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://imdb-api.com/en/API/Top250Movies/" + apiKey))
-                    .timeout(Duration.ofMinutes(1))
+                    .uri(URI.create(endpoint))
                     .GET()
                     .build();
 
@@ -33,6 +34,6 @@ public class ImdbAPIClient implements APIClient{
         } catch (IOException | InterruptedException e) {
             throw new IllegalStateException(e);
         }
-
     }
 }
+

@@ -23,3 +23,16 @@ Utilizando o PrintWriter criei um arquivo HTML e utilizei Bootstrap para estiliz
 
 # Dia 5
 Neste quinto dia o desafio foi encapsular a chamada de API. Além disso foi encapsulado também o código que faz o parseamento do JSON, assim foram criadas 2 novas classes no projeto (ImbdApiClient e br.com.alura.desafio.main.Movie).
+
+# Dia 6
+No sexto dia foi implementadas interfaces para colocarmos em algumas classes, assim deixando o código mais organizado e garantindo que a estrutura esteja de acordo com a que queremos.
+Também foi feito o exercício extra que consistia em consumir a API da Marvel para pegarmos dados de alguns quadrinhos e criar uma nova página como a de Filmes.
+
+# Dia 7
+O último desafio foi implementar a ordenação de elementos através dos métodos da 'Collections'. Para isso implementamos a interface 'Comparable' na classe (record) 'Movie' e 'Series', implementando o método compareTo.
+Por fim, no exercício extra foi pedido para juntar as duas listas de filmes e da Marvel utilizando a API de 'Streams'.
+
+# Conclusão
+Esse desafio foi essencial para recapitular todo o aprendizado obtido na Formação 'Java e Orientação a Objetos'. O projeto foi bem desafiador e com isso consegui aprender cada vez mais utilizando documentações de bibliotecas e do próprio JavaDoc.
+
+![Print 3 - Página criada de top 250 filmes](/img/print3.png)

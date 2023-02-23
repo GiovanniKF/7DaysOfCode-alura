@@ -33,6 +33,7 @@ public class HTMLGenerator {
                         <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                             <h4 class="card-header">%s</h4>
                             <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">%s</h6>
                                 <img class="card-img" src="%s" alt="%s">
                                 <p class="card-text mt-2">Nota: %s - Ano: %s</p>
                             </div>
@@ -40,7 +41,7 @@ public class HTMLGenerator {
                     </div>
                     """;
 
-            writer.println(String.format(divTemplate, content.title(), content.urlImage(), content.title(), content.rating(), content.year()));
+            writer.println(String.format(divTemplate, content.title(), content.type(), content.urlImage(), content.title(), content.rating(), content.year()));
         }
 
         writer.println(
